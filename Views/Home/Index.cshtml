@@ -1,0 +1,56 @@
+﻿@model Wedding
+
+@{
+  ViewData["Title"] = "Upcoming Weddings";
+}
+
+@await Html.PartialAsync("_Navbar")
+
+<div class="row">
+  <div>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Wedding Of</th>
+          <th scope="col">Date</th>
+          <th scope="col">Guest Count</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        @foreach (Wedding wedding in ViewBag.weddingTable)
+        {
+          <tr>
+            <td><a asp-action="WeddingDetails" asp-route-id="@wedding.WeddingId">@wedding.WedderOne &
+                @wedding.WedderTwo</a></td>
+            <td>@wedding.WeddingDate.ToString("MMM d yyyy")</td>
+            <td>@wedding.Invitations.Count</td>
+            @{
+              var weddingEvent = wedding.Invitations.Any(e => e.WeddingId == wedding.WeddingId && e.UserId ==
+              ViewBag.UserId);
+              @if (ViewBag.userId == wedding.UserId)
+              {
+                <td> <a asp-action="Deletewedding" asp-route-id="@wedding.WeddingId"
+                    class="btn btn-outline-danger border-2 w-100">Delete</a> </td>
+              }
+              else
+              {
+                if (!weddingEvent)
+                {
+                  <td> <a asp-action="AttendWedding" asp-route-id="@wedding.WeddingId"
+                      class="btn btn-outline-success border-2 w-100">RSVP</a> </td>
+                }
+                else
+                {
+                  <td> <a asp-action="DoNotAttendWedding" asp-route-id="@wedding.WeddingId"
+                      class="btn btn-outline-primary border-2 w-100">Un-RSVP</a> </td>
+                }
+              }
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

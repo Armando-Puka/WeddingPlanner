@@ -1,0 +1,50 @@
+@model Wedding
+
+@{
+  ViewData["Title"] = "Plan a Wedding";
+}
+
+
+@await Html.PartialAsync("_Navbar")
+
+<h1>Plan a Wedding</h1>
+
+<div class="row">
+    <div class="col-5">
+        <form asp-action="CreateWedding" method="post">
+            <div class="d-flex align-items-center justify-content-between mt-3">
+                <label asp-for="WedderOne">Wedder One:</label>
+                <input asp-for="WedderOne" class="form-control border border-2 border-dark rounded w-70" placeholder="First Wedder">
+            </div>
+            <span class="d-flex justify-content-end">
+                <span asp-validation-for="WedderOne" class="text-danger"></span>
+            </span>
+
+            <div class="d-flex align-items-center justify-content-between mt-3">
+                <label asp-for="WedderTwo">Wedder Two:</label>
+                <input asp-for="WedderTwo" class="form-control border border-2 border-dark rounded w-70" placeholder="Second Wedder">
+            </div>
+            <span class="d-flex justify-content-end">
+                <span asp-validation-for="WedderTwo" class="text-danger justify-content-end"></span>
+            </span>
+
+            <div class="d-flex align-items-center justify-content-between mt-3">
+                <label asp-for="WeddingDate">Date:</label>
+                <input asp-for="WeddingDate" class="form-control border border-2 border-dark rounded w-70">
+            </div>
+            <span class="d-flex justify-content-end">
+                <span asp-validation-for="WeddingDate" class="text-danger"></span>
+            </span>
+            
+            <div class="d-flex align-items-center justify-content-between mt-3">
+                <label asp-for="WeddingAddress">Address:</label>
+                <input asp-for="WeddingAddress" class="form-control border border-2 border-dark rounded w-70" placeholder="Wedding Location">
+            </div>
+            <span class="d-flex justify-content-end">
+                <span asp-validation-for="WeddingAddress" class="text-danger"></span>
+            </span>
+
+            <input type="submit" class="btn btn-outline-dark border-dark border-2 rounded mt-3" value="Create">
+        </form>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+@model Wedding
+
+@{
+    ViewData["Title"] = "Wedding Details";
+}
+
+@await Html.PartialAsync("_Navbar")
+
+<h1>@Model.WedderOne & @Model.WedderTwo</h1>
+<h3 class="mt-4">Date: @Model.WeddingDate.ToString("MMM d yyyy")</h3>
+
+<h4 class="mt-3">Guests:</h4>
+<div class="border border-dark border-2 w-30 plr-10 pt-2">
+    @if (Model.Invitations != null && Model.Invitations.Any())
+    {
+      @foreach (var invitation in Model.Invitations)
+      {
+          <p class="fs-22">@invitation.Invited?.Name</p>
+      }
+    } else {
+      <p>No guests are currently attending.</p>
+    }
+</div>
